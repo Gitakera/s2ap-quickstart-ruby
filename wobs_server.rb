@@ -24,11 +24,11 @@ require 'sinatra'
 require 'json'
 require 'jwt'
 
-require 'wobs_constants'
-require 'loyaltyclass'
-require 'loyaltyobject'
-require 'offerclass'
-require 'offerobject'
+require './wobs_constants'
+require './loyaltyclass'
+require './loyaltyobject'
+require './offerclass'
+require './offerobject'
 
 include WalletConstants
 
