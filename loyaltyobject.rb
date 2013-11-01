@@ -33,29 +33,46 @@ module LoyaltyObject
       },
       "classId" => "#{issuerId}.#{classId}",
       "id" => "#{issuerId}.#{objectId}",
-      "issuerData" => {
-        "g_expanded" => {
-          "infoModule" => {
-            "row0" => {
-              "col0" => {
-                "label" => {
-                  "string" => "Member Name"
-                },
-                "value" => {
-                  "string" => "Joe Smith"
-                }
-              },
-              "col1" => {
-                "label" => {
-                  "string" => "Next Reward In"
-                },
-                "value" => {
-                  "int" => 2
-                }
-              }
-            }
-          }
-        }
+      "textModuleDatas"=> [{
+        "header"=> "Rewards details textModuleDatas",
+        "body"=> "Welcome to Baconrista rewards. For every 5 " +
+                  "coffees purchased you\"ll receive a free " +
+                  "bacon fat latte. "
+      }],
+      "linksModuleData"=> {
+        "uris"=> [
+          {
+            "kind"=> "walletobjects#uri",
+            "uri"=> "http://www.example.com",
+            "description"=> "Example"
+          },
+          {
+            "kind"=> "walletobjects#uri",
+            "uri"=> "http://www.example2.com",
+            "description"=> "Example2"
+          }]
+      },
+      "infoModuleData"=> {
+        "hexFontColor"=> "#e7e12f",
+        "hexBackgroundColor"=> "#b41515",
+        "labelValueRows"=> [{            
+            "columns"=> [{     
+              "label"=> "Member Name",
+              "value"=> "John Smith"
+          }, {                    
+            "label"=> "Next Reward in",
+            "value"=> "2 coffees"
+          }]
+        }, {                    
+            "columns"=> [{     
+              "label"=> "Label 2",
+              "value"=> "Value 2"
+            }, {                  
+              "label"=> "Label 3",
+              "value"=> "Value 3"
+            }]
+        }],
+        "showLastUpdateTime"=> "true" 
       },
       "loyaltyPoints" => {
         "balance" => {
@@ -66,13 +83,13 @@ module LoyaltyObject
       },
       "messages" => [{
         "actionUri" => {
-          "uri" => "http://google.com/drive"
+          "uri" => "http://baconrista.com"
         },
-        "body" => "Welcome to Drive Rewards!",
+        "body" => "Welcome to Baconrista Rewards!",
         "header" => "Welcome",
         "image" => {
           "sourceUri" => {
-            "uri" => "http://www.google.com/images/icons/product/drive-128.png"
+            "uri" => "http://ssl.gstatic.com/codesite/ph/images/search-48.png"
           }
         }
       }],

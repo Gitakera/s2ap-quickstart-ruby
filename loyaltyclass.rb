@@ -31,72 +31,7 @@ module LoyaltyClass
         "uri" => "https://www.example.com"
       },
       "id" => "#{issuerId}.#{classId}",
-      "issuerData" => {
-        "g_expanded" => {
-          "textModule" => {
-            "header" => {
-              "string" => "Rewards details"
-            },
-            "body" => {
-              "string" => "Welcome to Drive rewards.  For every 5 files uploaded you'll receive a free byte of space"
-            }
-          },
-          "linksModule" => {
-            "uri0" => {
-              "uri" => {
-                "kind" => "walletobjects#uri",
-                "uri" => "http://www.google.com/drive",
-                "description" => "Google Drive"
-              }
-            }
-          },
-          "infoModule" => {
-            "fontColor" => {
-              "string" => "#FF3300"
-            },
-            "backgroundColor" => {
-              "string" => "#ABABAB"
-            },
-            "row0" => {
-              "col0" => {
-                "label" => {
-                  "string" => "Label 0"
-                },
-                "value" => {
-                  "string" => "Value 0"
-                }
-              },
-              "col1" => {
-                "label" => {
-                  "string" => "Label 1"
-                },
-                "value" => {
-                  "string" => "Value1"
-                }
-              }
-            },
-            "row1" => {
-              "col0" => {
-                "label" => {
-                  "string" => "Label 0"
-                },
-                "value" => {
-                  "string" => "Value 0"
-                }
-              },
-              "col1" => {
-                "label" => {
-                  "string" => "Label 1"
-                },
-                "value" => {
-                  "string" => "Value1"
-                }
-              }
-            }
-          }
-        }
-      },
-      "issuerName" => "Google Drive",
+      "issuerName" => "Baconrista",
       "kind" => "walletobjects#loyaltyClass",
       "locations"=> [{
         "kind" => "walletobjects#latLongPoint",
@@ -106,15 +41,15 @@ module LoyaltyClass
       "messages"=> [{
         "actionUri" => {
           "kind" => "walletobjects#uri",
-          "uri" => "http://www.google.com/drive"
+          "uri" => "http://baconrista.com"
         },
-        "body" => "Welcome to Drive Rewards!",
+        "body" => "Welcome to Baconrista Rewards!",
         "header" => "Welcome",
         "image" => {
           "kind" => "walletobjects#image",
           "sourceUri" => {
             "kind" => "walletobjects#uri",
-            "uri" => "http://www.google.com/images/icons/product/drive-128.png"
+            "uri" => "http://ssl.gstatic.com/codesite/ph/images/search-48.png"
           }
         },
         "kind" => "walletobjects#walletObjectMessage"
@@ -123,10 +58,10 @@ module LoyaltyClass
         "kind" => "walletobjects#image",
         "sourceUri" => {
           "kind" => "walletobjects#uri",
-          "uri" => "http://www.google.com/images/icons/product/drive-128.png"
+          "uri" => "http://www.google.com/landing/chrome/ugc/chrome-icon.jpg"
         }
       },
-      "programName" => "Drive Rewards",
+      "programName" => "Baconrista Rewards",
       "renderSpecs"=> [{
         "templateFamily" => "1.loyaltyCard1_list",
         "viewName" => "g_list"
