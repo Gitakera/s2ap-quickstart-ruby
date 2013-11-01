@@ -114,7 +114,6 @@ post "/insert/:type" do |typ|
   ]
 end
 
-
 post "/webservice" do
   #merchant needs to create the wallet object if successful return object otherwise return response error
   success = true
