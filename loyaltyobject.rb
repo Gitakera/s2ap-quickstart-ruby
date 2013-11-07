@@ -89,7 +89,7 @@ module LoyaltyObject
         "header" => "Welcome",
         "image" => {
           "sourceUri" => {
-            "uri" => "http://ssl.gstatic.com/codesite/ph/images/search-48.png"
+            "uri" => "http://www.google.com/landing/chrome/ugc/chrome-icon.jpg"
           }
         }
       }],
