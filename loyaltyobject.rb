@@ -20,7 +20,6 @@
  */
 =end
 module LoyaltyObject
-  
   def LoyaltyObject.generate_object(issuerId, classId, objectId)
     loyalty_object = {
       "accountId" => "1234567890",
@@ -55,24 +54,24 @@ module LoyaltyObject
       "infoModuleData"=> {
         "hexFontColor"=> "#e7e12f",
         "hexBackgroundColor"=> "#b41515",
-        "labelValueRows"=> [{            
-            "columns"=> [{     
+        "labelValueRows"=> [{
+            "columns"=> [{
               "label"=> "Member Name",
               "value"=> "John Smith"
-          }, {                    
+          }, {
             "label"=> "Next Reward in",
             "value"=> "2 coffees"
           }]
-        }, {                    
-            "columns"=> [{     
+        }, {
+            "columns"=> [{
               "label"=> "Label 2",
               "value"=> "Value 2"
-            }, {                  
+            }, {
               "label"=> "Label 3",
               "value"=> "Value 3"
             }]
         }],
-        "showLastUpdateTime"=> "true" 
+        "showLastUpdateTime"=> "true"
       },
       "loyaltyPoints" => {
         "balance" => {
