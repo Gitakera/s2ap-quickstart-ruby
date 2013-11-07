@@ -1,24 +1,18 @@
-Setup the Ruby JWT Server using Sinatra
-------------------------------------------------
+wallet-objects-quickstart-ruby
+==============================
 
-Prerequisites:
--------------
-1. You have a merchant id and a seller secret hereby referred to as MERCHANT_ID, MERCHANT_SECRET  (also known as seller secret)
-2. You have already registered a Client ID for installed applications (https://code.google.com/apis/console/) and have the Client Id and the certificate fingerprint handy. They will be referred to in this README as CLIENT_EMAIL and KEYFILE respectively.
+This sample demonstrates integration of the basic components of the Wallet Objects API.  Review the [quickstart guide](https://developers.google.com/commerce/wallet/objects/quickstart-rubyd) to run the sample.
 
+This sample showcases several aspects of the API
+* Creation of Wallet Classes and Wallet Objects
+* Save to Wallet insertion of classes and objects
+* The Web Service API
 
-Getting Started
-----------------
-1. Install Ruby 1.9.3 or later
-2. Install the following gems
-   gem install google-api-client
-   gem install json
-   gem install sinatra
-   gem install jwt
-3. Download or clone the source from Github (https://github.com/googlewallet/walletobjects-quickstart-ruby) in any folder from where you will run the server
+##Creation of Wallet Classes and Wallet Objects
+The code for creation of classes and objects can be found in loyaltyclass.rb, loyaltyobject.rb, offerclass.rb, offerobject.rb.  Each Wallet Object type, such as loyalty, is broken out into its own file.  Classes are inserted using the wobs-server.rb.
 
-Set up the Project
-------------------
-1. Change the wobs_constants.rb values, here all the constants are self explanatory.
-2. Run the server with "ruby wobs_server.rb -p 8080" command
-3. Navigate your web browser to http://localhost:8080/ to view the sample application running
+## Save to Wallet insertion of classes and objects
+Save to Wallet is handled on both the client and server.  The index.html file is the landing page for the application and includes app.js.  The app.js file makes a request to the /jwt path to generate Wallet Object type-specific JWTs. The app.js file inserts the appropriate g:wallet tags and the Save to Wallet JavaScript after all of the JWTs are generated.  The JavaScript must be appended after the g:wallet tags because it parses the page to render Save to Wallet buttons when it's completed loading.
+
+## Webservice API
+The Webservice API handler is /webservice.  This path handles Webservice requests, generates Loyalty Objects, converts Loyalty Objects to JWTs, and responds with the JWT.  You can configure your discoverable to point to the URL handled by /webservice.
