@@ -32,7 +32,7 @@ module LoyaltyObject
       },
       "classId" => "#{issuerId}.#{classId}",
       "id" => "#{issuerId}.#{objectId}",
-      "textModuleDatas"=> [{
+      "textModulesData"=> [{
         "header"=> "Rewards details textModuleDatas",
         "body"=> "Welcome to Baconrista rewards. For every 5 " +
                   "coffees purchased you\"ll receive a free " +
