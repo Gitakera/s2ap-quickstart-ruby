@@ -20,13 +20,12 @@
  */
 =end
 module OfferClass
-  
   def OfferClass.generate_class(issuerId, classId)
-    offer_class = { 
+    offer_class = {
       "kind" => "walletobjects#offerClass",
       "id" => "#{issuerId}.#{classId}",
       "version" => "1",
-      "issuerName" => "Google Drive",
+      "issuerName" => "Baconrista Coffee",
       "issuerData" => {
       "kind" => "walletobjects#typedValue"
       },
@@ -40,7 +39,7 @@ module OfferClass
       "allowMultipleUsersPerObject"=>true,
         "homepageUri" => {
         "kind" => "walletobjects#uri",
-        "uri" => "http://www.google.com/drive",
+        "uri" => "ttp://www.google.com/",
         "description" => "Website"
       },
       "locations"=>[{
@@ -60,14 +59,15 @@ module OfferClass
       "review" => {
         "comments" => "Real auto approval by system"
       },
-      "title" => "20% faster upload of one file",
+      "title" => "Baconrista Deals",
       "redemptionChannel" => "both",
       "provider" => "Google Drive Deals",
       "titleImage" => {
         "kind" => "walletobjects#image",
         "sourceUri" => {
           "kind" => "walletobjects#uri",
-          "uri" => "http://www.google.com/images/icons/product/drive-128.png"
+          "uri" => "http://3.bp.blogspot.com/-AvC1agljv9Y/TirbDXOBIPI/" +
+                   "AAAAAAAACK0/hR2gs5h2H6A/s1600/Bacon%2BWallpaper.png"
         }
       },
       "details" => "20% faster upload of one file"

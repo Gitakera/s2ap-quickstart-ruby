@@ -20,7 +20,6 @@
  */
 =end
 module OfferObject
-  
   def OfferObject.generate_object(issuerId, classId, objectId)
     offer_object = {
       "kind" => "walletobjects#offerObject",
@@ -38,6 +37,6 @@ module OfferObject
         "label" => "User Id",
         "alternateText" => "12345"
       }
-    }      
+    }
   end
 end

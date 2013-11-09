@@ -20,9 +20,9 @@
  */
 =end
 module LoyaltyClass
-  
+
   def LoyaltyClass.generate_class(issuerId, classId)
-    loyalty_class = { 
+    loyalty_class = {
       "accountIdLabel" => "Member Id",
       "accountNameLabel" => "Member Name",
       "allowMultipleUsersPerObject"=> true,
