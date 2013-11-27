@@ -25,14 +25,37 @@
 module WalletConstants
 # EDIT THIS SECTION
 # ------------------------
-  MERCHANT_ID ="YourWalletObjectsIssuerID"
-  CLIENT_EMAIL = "YourServiceAccountId@developer.gserviceaccount.com" # Email of service account
-  MERCHANT_SECRET = "MerchantSellerSecret"  # Passphrase for private key
-  KEYFILE = "wobs-privatekey.p12" # Filename of the private key
+  SERVICE_ACCOUNT_EMAIL_ADDRESS = "ServiceAccountEmail@developer.gserviceaccount.com" # Email of service account
+  ISSUER_ID ="IssuerId"
+  SERVICE_ACCOUNT_PRIVATE_KEY = "wobs-privatekey.p12" # Filename of the private key
+  APPLICATION_NAME = "Wallet Objects Demo"
   ORIGINS = ["http://localhost:8080/"]
-  LOYALTY_CLASS_ID = "DriveLoyaltyClass"
-  LOYALTY_OBJECT_ID = "DriveLoyaltyObject"
-  OFFER_CLASS_ID = "DriveOfferClass"
-  OFFER_OBJECT_ID = "DriveOfferObject"
+  LOYALTY_CLASS_ID = "LoyaltyClass"
+  LOYALTY_OBJECT_ID = "LoyaltyObject"
+  OFFER_CLASS_ID = "OfferClass"
+  OFFER_OBJECT_ID = "OfferObject"
+  SCOPES = "https://www.googleapis.com/auth/wallet_object.issuer"
 # ------------------------
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

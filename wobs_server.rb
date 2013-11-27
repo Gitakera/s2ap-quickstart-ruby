@@ -38,17 +38,24 @@ end
 
 configure do
   # Creates new Google API client instance to authorize service account
-  client = Google::APIClient.new
-  key = Google::APIClient::PKCS12.load_key(KEYFILE, MERCHANT_SECRET)
-  asserter = Google::APIClient::JWTAsserter.new(
-     CLIENT_EMAIL,
-     'https://www.googleapis.com/auth/wallet_object.issuer',
-     key)
-  client.authorization = asserter.authorize() 
+  client = Google::APIClient.new(
+    :application_name => APPLICATION_NAME
+  )
+  key = Google::APIClient::KeyUtils.load_from_pkcs12(SERVICE_ACCOUNT_PRIVATE_KEY, 'notasecret')
+  client.authorization = Signet::OAuth2::Client.new(
+    :token_credential_uri => 'https://accounts.google.com/o/oauth2/token',
+    :audience => 'https://accounts.google.com/o/oauth2/token',
+    :scope => SCOPES,
+    :issuer => SERVICE_ACCOUNT_EMAIL_ADDRESS,
+    :signing_key => key)
+
+  ## Request a token for our service account
+  client.authorization.fetch_access_token!
   # Reads WOBS discovery file
   doc = File.read('wobs-discovery.json')
   # Registers API client using discovered file
-  client.register_discovery_document('walletobjects', 'v1', doc) 
+  client.register_discovery_document('walletobjects', 'v1', doc)
+  puts client.authorization().scope
   # Gets the discovered api from the client and sets as walletobjects
   walletobjects = client.discovered_api('walletobjects', 'v1')
   set :api_client, client
@@ -56,15 +63,15 @@ configure do
 end
 
 def api_client; settings.api_client; end
-def walletobjects; settings.walletobjects; end  
-  
+def walletobjects; settings.walletobjects; end
+
 get "/" do
   File.read("index.html")
 end
 
 get "/jwt/:type" do |typ|
   jwt = {
-    "iss"=> CLIENT_EMAIL,
+    "iss"=> SERVICE_ACCOUNT_EMAIL_ADDRESS,
     "aud" => "google",
     "typ" => "savetowallet",
     "iat"=> Time.now.utc.to_i,
@@ -77,23 +84,23 @@ get "/jwt/:type" do |typ|
     "origins"=> ORIGINS
   }
   case typ when "loyalty"
-    loyaltyobject = LoyaltyObject.generate_object(MERCHANT_ID,LOYALTY_CLASS_ID,LOYALTY_OBJECT_ID)
+    loyaltyobject = LoyaltyObject.generate_object(ISSUER_ID,LOYALTY_CLASS_ID,LOYALTY_OBJECT_ID)
     jwt['payload']['loyaltyObjects'].push(loyaltyobject)
   when "offer"
-    offerobject = OfferObject.generate_object(MERCHANT_ID,OFFER_CLASS_ID,OFFER_OBJECT_ID)
+    offerobject = OfferObject.generate_object(ISSUER_ID,OFFER_CLASS_ID,OFFER_OBJECT_ID)
     jwt['payload']['offerObjects'].push(offerobject)
   end
-  private_key = Google::APIClient::PKCS12.load_key(KEYFILE, MERCHANT_SECRET)
+  private_key = Google::APIClient::PKCS12.load_key(SERVICE_ACCOUNT_PRIVATE_KEY, 'notasecret')
   jwtEncoded = JWT.encode(jwt, private_key, "RS256")
 end
 
 post "/insert/:type" do |typ|
   case typ when "loyalty"
-    api_object = LoyaltyClass.generate_class(MERCHANT_ID,LOYALTY_CLASS_ID)
+    api_object = LoyaltyClass.generate_class(ISSUER_ID,LOYALTY_CLASS_ID)
     object_id = LOYALTY_CLASS_ID
     api_method = walletobjects.loyaltyclass.insert
   when "offer"
-    api_object = OfferClass.generate_class(MERCHANT_ID,OFFER_CLASS_ID)
+    api_object = OfferClass.generate_class(ISSUER_ID,OFFER_CLASS_ID)
     object_id = OFFER_CLASS_ID
     api_method = walletobjects.offerclass.insert
   end
@@ -102,8 +109,9 @@ post "/insert/:type" do |typ|
     :api_method => api_method,
     :body_object => api_object
   )
+  puts result
   if (result.error?)
-    message = "Error inserting: #{typ} #{result.error_message}" 
+    message = "Error inserting: #{typ} #{result.error_message}"
   else
     message = "Successfully inserted: #{typ} #{object_id}"
   end
@@ -117,10 +125,10 @@ end
 post "/webservice" do
   #merchant needs to create the wallet object if successful return object otherwise return response error
   success = true
-  if(!success)  
+  if(!success)
     error_action = (@input['params']['linkingId']) ? "link" : "signup"
     jwt = {
-      "iss" => CLIENT_EMAIL,
+      "iss" => SERVICE_ACCOUNT_EMAIL_ADDRESS,
       "aud" => "google",
       "typ" => "loyaltywebservice",
       "iat" =>  Time.now.utc.to_i,
@@ -133,7 +141,7 @@ post "/webservice" do
     }
   else
     jwt = {
-      "iss" => CLIENT_EMAIL,
+      "iss" => SERVICE_ACCOUNT_EMAIL_ADDRESS,
       "aud" => "google",
       "typ" => "loyaltywebservice",
       "iat" =>  Time.now.utc.to_i,
@@ -146,11 +154,11 @@ post "/webservice" do
       },
     }
     loyalty_object_id = (@input['params']['linkingId']) ? @input['params']['linkingId'] : LOYALTY_OBJECT_ID
-    loyalty_object = LoyaltyObject.generate_object(MERCHANT_ID, LOYALTY_CLASS_ID, LOYALTY_OBJECT_ID)
+    loyalty_object = LoyaltyObject.generate_object(ISSUER_ID, LOYALTY_CLASS_ID, LOYALTY_OBJECT_ID)
     jwt['payload']['loyaltyObjects'].push(loyalty_object)
   end
   # Loads a key from PKCS12 file using the private key and merchant secret
-  private_key = Google::APIClient::PKCS12.load_key(KEYFILE, MERCHANT_SECRET)
+  private_key = Google::APIClient::PKCS12.load_key(SERVICE_ACCOUNT_PRIVATE_KEY, 'notasecret')
   jwt_encoded = JWT.encode(jwt, private_key, "RS256")
 end
 
@@ -163,7 +171,7 @@ get "/list-classes/:type" do |typ|
   # Makes an API call to list loyalty or offer classes based on issuerId
   result = api_client.execute(
     :api_method => api_method,
-    :parameters => {'issuerId' => MERCHANT_ID }
+    :parameters => {'issuerId' => ISSUER_ID }
   )
   return [
     200,
@@ -175,10 +183,10 @@ end
 get "/list-objects/:type" do |typ|
   case typ when "loyalty"
     api_method = walletobjects.loyaltyobject.list
-    class_id = "#{MERCHANT_ID}.#{LOYALTY_CLASS_ID}"
+    class_id = "#{ISSUER_ID}.#{LOYALTY_CLASS_ID}"
   when "offer"
     api_method = walletobjects.offerobject.list
-    class_id = "#{MERCHANT_ID}.#{OFFER_CLASS_ID}"
+    class_id = "#{ISSUER_ID}.#{OFFER_CLASS_ID}"
   end
   # Makes an API call to list loyalty or offer objects based on classId
   result = api_client.execute(
@@ -195,16 +203,16 @@ end
 get "/get/:type" do |typ|
   case typ when "loyaltyclass"
     api_method = walletobjects.loyaltyclass.get
-    resource_id = "#{MERCHANT_ID}.#{LOYALTY_CLASS_ID}"
+    resource_id = "#{ISSUER_ID}.#{LOYALTY_CLASS_ID}"
   when "offerclass"
     api_method = walletobjects.offerclass.get
-    resource_id = "#{MERCHANT_ID}.#{OFFER_CLASS_ID}"
+    resource_id = "#{ISSUER_ID}.#{OFFER_CLASS_ID}"
   when "loyaltyobject"
     api_method = walletobjects.loyaltyobject.get
-    resource_id = "#{MERCHANT_ID}.#{LOYALTY_OBJECT_ID}"
+    resource_id = "#{ISSUER_ID}.#{LOYALTY_OBJECT_ID}"
   when "offerobject"
     api_method = walletobjects.offerobject.get
-    resource_id = "#{MERCHANT_ID}.#{OFFER_OBJECT_ID}"
+    resource_id = "#{ISSUER_ID}.#{OFFER_OBJECT_ID}"
   end
   # Makes an API call to get class or object based on type received in the request
   result = api_client.execute(
@@ -222,19 +230,19 @@ get "/update/:type" do |typ|
   case typ when "loyaltyclass"
     api_get_method = walletobjects.loyaltyclass.get
     api_update_method = walletobjects.loyaltyclass.update
-    resource_id = "#{MERCHANT_ID}.#{LOYALTY_CLASS_ID}"
+    resource_id = "#{ISSUER_ID}.#{LOYALTY_CLASS_ID}"
   when "offerclass"
     api_get_method = walletobjects.offerclass.get
     api_update_method = walletobjects.offerclass.update
-    resource_id = "#{MERCHANT_ID}.#{OFFER_CLASS_ID}"
+    resource_id = "#{ISSUER_ID}.#{OFFER_CLASS_ID}"
   when "loyaltyobject"
     api_get_method = walletobjects.loyaltyobject.get
     api_update_method = walletobjects.loyaltyobject.update
-    resource_id = "#{MERCHANT_ID}.#{LOYALTY_OBJECT_ID}"
+    resource_id = "#{ISSUER_ID}.#{LOYALTY_OBJECT_ID}"
   when "offerobject"
     api_get_method = walletobjects.offerobject.get
     api_update_method = walletobjects.offerobject.update
-    resource_id = "#{MERCHANT_ID}.#{OFFER_OBJECT_ID}"
+    resource_id = "#{ISSUER_ID}.#{OFFER_OBJECT_ID}"
   end
   # Makes API Call to get class or object based on type received in the request
   get_result = api_client.execute(
@@ -263,16 +271,16 @@ end
 get "/add-message/:type" do |typ|
   case typ when "loyaltyclass"
     api_method = walletobjects.loyaltyclass.addmessage
-    resource_id = "#{MERCHANT_ID}.#{LOYALTY_CLASS_ID}"
+    resource_id = "#{ISSUER_ID}.#{LOYALTY_CLASS_ID}"
   when "offerclass"
     api_method = walletobjects.offerclass.addmessage
-    resource_id = "#{MERCHANT_ID}.#{OFFER_CLASS_ID}"
+    resource_id = "#{ISSUER_ID}.#{OFFER_CLASS_ID}"
   when "loyaltyobject"
     api_method = walletobjects.loyaltyobject.addmessage
-    resource_id = "#{MERCHANT_ID}.#{LOYALTY_OBJECT_ID}"
+    resource_id = "#{ISSUER_ID}.#{LOYALTY_OBJECT_ID}"
   when "offerobject"
     api_method = walletobjects.offerobject.addmessage
-    resource_id = "#{MERCHANT_ID}.#{OFFER_OBJECT_ID}"
+    resource_id = "#{ISSUER_ID}.#{OFFER_OBJECT_ID}"
   end
   add_message = {
     "message" => {
@@ -285,7 +293,7 @@ get "/add-message/:type" do |typ|
         "sourceUri" => {
           "uri" => "http://www.google.com/images/icons/product/drive-128.png"
         }
-      } 
+      }
     }
   }
   # Makes API Call to add message to class or object based on type received in the request
