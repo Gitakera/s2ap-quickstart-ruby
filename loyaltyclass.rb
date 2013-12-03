@@ -20,7 +20,6 @@
  */
 =end
 module LoyaltyClass
-
   def LoyaltyClass.generate_class(issuerId, classId)
     loyalty_class = {
       "accountIdLabel" => "Member Id",
@@ -38,18 +37,50 @@ module LoyaltyClass
         "latitude" => 37.422601,
         "longitude" => -122.085286
       }],
+      "textModulesData"=> [
+        {
+          "header"=> "Rewards details",
+          "body"=> "Welcome to Baconrista rewards.  For every 5 coffees purchased " +
+                   "you'll receive a free bacon fat latte"
+        }
+      ],
+      "linksModuleData"=> {
+        "uris"=> [
+          {
+            "kind"=> "walletobjects#uri",
+            "uri"=> "http://www.baconrista.com/",
+            "description"=> "Baconrista"
+          }
+        ]
+      },
+      "infoModuleData"=> {
+        "hexFontColor"=> "#FF3300",
+        "hexBackgroundColor"=> "#ABABAB"
+      },
+      "imageModulesData"=> [
+        {
+          "mainImage"=> {
+            "kind"=> "walletobjects#image",
+            "sourceUri"=> {
+              "kind"=> "walletobjects#uri",
+              "uri"=> "http://farm8.staticflickr.com/7401/11177116434_d8e600bba6_o.jpg",
+              "description"=> "Coffee beans"
+            }
+          }
+        }
+      ],
       "messages"=> [{
         "actionUri" => {
           "kind" => "walletobjects#uri",
           "uri" => "http://baconrista.com"
         },
-        "body" => "Welcome to Baconrista Rewards!",
-        "header" => "Welcome",
+        "body" => "Welcome to Banconrista Rewards!",
+        "header" => "Featuring our new bacon donuts.",
         "image" => {
           "kind" => "walletobjects#image",
           "sourceUri" => {
             "kind" => "walletobjects#uri",
-            "uri" => "http://www.google.com/landing/chrome/ugc/chrome-icon.jpg"
+            "uri" => "http://farm8.staticflickr.com/7302/11177240353_115daa5729_o.jpg"
           }
         },
         "kind" => "walletobjects#walletObjectMessage"
@@ -58,7 +89,7 @@ module LoyaltyClass
         "kind" => "walletobjects#image",
         "sourceUri" => {
           "kind" => "walletobjects#uri",
-          "uri" => "http://www.google.com/landing/chrome/ugc/chrome-icon.jpg"
+          "uri" => "http://farm8.staticflickr.com/7340/11177041185_a61a7f2139_o.jpg"
         }
       },
       "programName" => "Baconrista Rewards",

@@ -20,10 +20,10 @@
  */
 =end
 module LoyaltyObject
-  def LoyaltyObject.generate_object(issuerId, classId, objectId)
+ def LoyaltyObject.generate_object(issuerId, classId, objectId)
     loyalty_object = {
       "accountId" => "1234567890",
-      "accountName" => "John Smith",
+      "accountName" => "Jane Doe",
       "barcode" => {
         "alternateText" => "12345",
         "label" => "User Id",
@@ -33,43 +33,41 @@ module LoyaltyObject
       "classId" => "#{issuerId}.#{classId}",
       "id" => "#{issuerId}.#{objectId}",
       "textModulesData"=> [{
-        "header"=> "Rewards details textModuleDatas",
-        "body"=> "Welcome to Baconrista rewards. For every 5 " +
-                  "coffees purchased you\"ll receive a free " +
-                  "bacon fat latte. "
+        "header"=> "Jane's Baconrista Rewards",
+        "body"=> "You are 5 coffees away from receiving a free " +
+                  "bacon fat latte"
       }],
       "linksModuleData"=> {
         "uris"=> [
           {
             "kind"=> "walletobjects#uri",
-            "uri"=> "http://www.example.com",
-            "description"=> "Example"
-          },
-          {
-            "kind"=> "walletobjects#uri",
-            "uri"=> "http://www.example2.com",
-            "description"=> "Example2"
+            "uri"=> "http://www.baconrista.com/myaccount?id=1234567890",
+            "description"=> "My Baconrista Account"
           }]
       },
       "infoModuleData"=> {
-        "hexFontColor"=> "#e7e12f",
-        "hexBackgroundColor"=> "#b41515",
+        "hexFontColor"=> "#FFFFFF",
+        "hexBackgroundColor"=> "#FC058C",
         "labelValueRows"=> [{
-            "columns"=> [{
-              "label"=> "Member Name",
-              "value"=> "John Smith"
+          "hexFontColor"=> "#000000",
+          "hexBackgroundColor"=> "#BBCCFC",
+          "columns"=> [{
+            "label"=> "Member Name",
+            "value"=> "Jane Doe"
           }, {
-            "label"=> "Next Reward in",
-            "value"=> "2 coffees"
+            "label"=> "Membership #",
+            "value"=> "1234567890"
           }]
         }, {
-            "columns"=> [{
-              "label"=> "Label 2",
-              "value"=> "Value 2"
-            }, {
-              "label"=> "Label 3",
-              "value"=> "Value 3"
-            }]
+          "hexFontColor"=> "#EDEDDD",
+          "hexBackgroundColor"=> "#FFFB00",
+          "columns"=> [{
+            "label"=> "Next Reward in",
+            "value"=> "2 coffees"
+          }, {
+            "label"=> "Member Since",
+            "value"=> "01/15/2013"
+          }]
         }],
         "showLastUpdateTime"=> "true"
       },
@@ -78,17 +76,18 @@ module LoyaltyObject
           "string" => "500"
         },
         "label" => "Points",
-          "pointsType" => "rewards"
+          "pointsType" => "points"
       },
       "messages" => [{
         "actionUri" => {
           "uri" => "http://baconrista.com"
         },
-        "body" => "Welcome to Baconrista Rewards!",
-        "header" => "Welcome",
+        "header" => "Jane, welcome to Banconrista Rewards!",
+        "body" => "Thanks for joining our program. Show this message to " +
+                  "our barista for your first free coffee on us!",
         "image" => {
           "sourceUri" => {
-            "uri" => "http://www.google.com/landing/chrome/ugc/chrome-icon.jpg"
+            "uri" => "http://farm4.staticflickr.com/3723/11177041115_6e6a3b6f49_o.jpg"
           }
         }
       }],
