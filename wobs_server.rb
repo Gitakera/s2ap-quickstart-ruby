@@ -126,6 +126,9 @@ post "/webservice" do
   #merchant needs to create the wallet object if successful return object otherwise return response error
   success = true
   if(!success)
+    #possible status error codes:
+    #ERROR_INVALID_DATA_FORMAT, ERROR_DATA_ON_MERCHANT_RECORD_DIFFERENT
+    #ERROR_INVALID_LINKING_ID, ERROR_PREEXISTING_ACCOUNT_REQUIRES_LINKING, ERROR_ACCOUNT_ALREADY_LINKED
     error_action = (@input['params']['linkingId']) ? "link" : "signup"
     jwt = {
       "iss" => SERVICE_ACCOUNT_EMAIL_ADDRESS,
@@ -134,23 +137,27 @@ post "/webservice" do
       "iat" =>  Time.now.utc.to_i,
       "payload" => {
         "webserviceResponse" => {
-          "message" => "Sorry we can't complete this #{error_action}",
-          "result" => "rejected"
+          "status" => "ERROR_INVALID_DATA_FORMAT"
+          "invalid_field" => [ "zipcode", "phone" ]
         },
       },
     }
   else
+    #possible success status codes:
+    #SUCCESS, SUCCESS_ACCOUNT_ALREADY_CREATED, SUCCESS_ACCOUNT_ALREADY_LINKED
     jwt = {
       "iss" => SERVICE_ACCOUNT_EMAIL_ADDRESS,
       "aud" => "google",
       "typ" => "loyaltywebservice",
       "iat" =>  Time.now.utc.to_i,
       "payload" => {
-        "webserviceResponse" => {
-          "result" => "approved"
-        },
         "loyaltyObjects" => Array.new,
-        "offerObjects" => Array.new
+        "offerObjects" => Array.new,
+        "loyaltyClasses" => Array.new,
+        "offerClasses" => Array.new,
+        "webserviceResponse" => {
+          "status" => "SUCCESS"
+        }
       },
     }
     loyalty_object_id = (@input['params']['linkingId']) ? @input['params']['linkingId'] : LOYALTY_OBJECT_ID
