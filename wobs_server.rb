@@ -137,7 +137,7 @@ post "/webservice" do
       "iat" =>  Time.now.utc.to_i,
       "payload" => {
         "webserviceResponse" => {
-          "status" => "ERROR_INVALID_DATA_FORMAT"
+          "status" => "ERROR_INVALID_DATA_FORMAT",
           "invalid_field" => [ "zipcode", "phone" ]
         },
       },
