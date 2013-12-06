@@ -24,58 +24,49 @@ module LoyaltyClass
     loyalty_class = {
       "accountIdLabel" => "Member Id",
       "accountNameLabel" => "Member Name",
-      "allowMultipleUsersPerObject"=> true,
-      "homepageUri" => {
-        "kind" => "walletobjects#uri",
-        "uri" => "https://www.example.com"
-      },
+      "allowMultipleUsersPerObject" => true,
       "id" => "#{issuerId}.#{classId}",
       "issuerName" => "Baconrista",
       "kind" => "walletobjects#loyaltyClass",
-      "locations"=> [{
-        "kind" => "walletobjects#latLongPoint",
-        "latitude" => 37.422601,
-        "longitude" => -122.085286
-      }],
-      "textModulesData"=> [
+      "textModulesData" => [
         {
-          "header"=> "Rewards details",
-          "body"=> "Welcome to Baconrista rewards.  For every 5 coffees purchased " +
+          "header" => "Rewards details",
+          "body" => "Welcome to Baconrista rewards.  For every 5 coffees purchased " +
                    "you'll receive a free bacon fat latte"
         }
       ],
-      "linksModuleData"=> {
-        "uris"=> [
+      "linksModuleData" => {
+        "uris" => [
           {
-            "kind"=> "walletobjects#uri",
-            "uri"=> "http://www.baconrista.com/",
-            "description"=> "Baconrista"
+            "kind" => "walletobjects#uri",
+            "uri" => "http://www.baconrista.com/",
+            "description" => "Baconrista"
           }
         ]
       },
-      "infoModuleData"=> {
-        "hexFontColor"=> "#FF3300",
-        "hexBackgroundColor"=> "#ABABAB"
+      "infoModuleData" => {
+        "hexFontColor" => "#FF3300",
+        "hexBackgroundColor" => "#ABABAB"
       },
-      "imageModulesData"=> [
+      "imageModulesData" => [
         {
-          "mainImage"=> {
-            "kind"=> "walletobjects#image",
-            "sourceUri"=> {
-              "kind"=> "walletobjects#uri",
-              "uri"=> "http://farm8.staticflickr.com/7401/11177116434_d8e600bba6_o.jpg",
-              "description"=> "Coffee beans"
+          "mainImage" => {
+            "kind" => "walletobjects#image",
+            "sourceUri" => {
+              "kind" => "walletobjects#uri",
+              "uri" => "http://farm8.staticflickr.com/7401/11177116434_d8e600bba6_o.jpg",
+              "description" => "Coffee beans"
             }
           }
         }
       ],
-      "messages"=> [{
+      "messages" => [{
         "actionUri" => {
           "kind" => "walletobjects#uri",
           "uri" => "http://baconrista.com"
         },
-        "body" => "Welcome to Banconrista Rewards!",
-        "header" => "Featuring our new bacon donuts.",
+        "header" => "Welcome to Banconrista Rewards!",
+        "body" => "Featuring our new bacon donuts.",
         "image" => {
           "kind" => "walletobjects#image",
           "sourceUri" => {
@@ -85,6 +76,11 @@ module LoyaltyClass
         },
         "kind" => "walletobjects#walletObjectMessage"
       }],
+      "locations" => [{
+        "kind" => "walletobjects#latLongPoint",
+        "latitude" => 37.422601,
+        "longitude" => -122.085286
+      }],
       "programLogo" => {
         "kind" => "walletobjects#image",
         "sourceUri" => {
@@ -93,7 +89,7 @@ module LoyaltyClass
         }
       },
       "programName" => "Baconrista Rewards",
-      "renderSpecs"=> [{
+      "renderSpecs" => [{
         "templateFamily" => "1.loyaltyCard1_list",
         "viewName" => "g_list"
       }, {

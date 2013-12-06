@@ -32,44 +32,44 @@ module LoyaltyObject
       },
       "classId" => "#{issuerId}.#{classId}",
       "id" => "#{issuerId}.#{objectId}",
-      "textModulesData"=> [{
-        "header"=> "Jane's Baconrista Rewards",
-        "body"=> "You are 5 coffees away from receiving a free " +
+      "textModulesData" => [{
+        "header" => "Jane's Baconrista Rewards",
+        "body" => "You are 5 coffees away from receiving a free " +
                   "bacon fat latte"
       }],
-      "linksModuleData"=> {
-        "uris"=> [
+      "linksModuleData" => {
+        "uris" => [
           {
-            "kind"=> "walletobjects#uri",
-            "uri"=> "http://www.baconrista.com/myaccount?id=1234567890",
-            "description"=> "My Baconrista Account"
+            "kind" => "walletobjects#uri",
+            "uri" => "http://www.baconrista.com/myaccount?id=1234567890",
+            "description" => "My Baconrista Account"
           }]
       },
-      "infoModuleData"=> {
-        "hexFontColor"=> "#FFFFFF",
-        "hexBackgroundColor"=> "#FC058C",
-        "labelValueRows"=> [{
-          "hexFontColor"=> "#000000",
-          "hexBackgroundColor"=> "#BBCCFC",
-          "columns"=> [{
-            "label"=> "Member Name",
-            "value"=> "Jane Doe"
+      "infoModuleData" => {
+        "hexFontColor" => "#FFFFFF",
+        "hexBackgroundColor" => "#FC058C",
+        "labelValueRows" => [{
+          "hexFontColor" => "#000000",
+          "hexBackgroundColor" => "#BBCCFC",
+          "columns" => [{
+            "label" => "Member Name",
+            "value" => "Jane Doe"
           }, {
-            "label"=> "Membership #",
-            "value"=> "1234567890"
+            "label" => "Membership #",
+            "value" => "1234567890"
           }]
         }, {
-          "hexFontColor"=> "#EDEDDD",
-          "hexBackgroundColor"=> "#FFFB00",
-          "columns"=> [{
-            "label"=> "Next Reward in",
-            "value"=> "2 coffees"
+          "hexFontColor" => "#EDEDDD",
+          "hexBackgroundColor" => "#FFFB00",
+          "columns" => [{
+            "label" => "Next Reward in",
+            "value" => "2 coffees"
           }, {
-            "label"=> "Member Since",
-            "value"=> "01/15/2013"
+            "label" => "Member Since",
+            "value" => "01/15/2013"
           }]
         }],
-        "showLastUpdateTime"=> "true"
+        "showLastUpdateTime" => "true"
       },
       "loyaltyPoints" => {
         "balance" => {
