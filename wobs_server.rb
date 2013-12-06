@@ -152,9 +152,6 @@ post "/webservice" do
       "iat" =>  Time.now.utc.to_i,
       "payload" => {
         "loyaltyObjects" => Array.new,
-        "offerObjects" => Array.new,
-        "loyaltyClasses" => Array.new,
-        "offerClasses" => Array.new,
         "webserviceResponse" => {
           "status" => "SUCCESS"
         }
