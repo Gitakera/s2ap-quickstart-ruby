@@ -138,7 +138,7 @@ post "/webservice" do
       "payload" => {
         "webserviceResponse" => {
           "status" => "ERROR_INVALID_DATA_FORMAT",
-          "invalid_field" => [ "zipcode", "phone" ]
+          "invalidField" => [ "zipcode", "phone" ]
         },
       },
     }
