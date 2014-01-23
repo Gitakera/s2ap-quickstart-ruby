@@ -29,6 +29,8 @@ require './loyaltyclass'
 require './loyaltyobject'
 require './offerclass'
 require './offerobject'
+require './giftcardclass'
+require './giftcardobject'
 
 include WalletConstants
 
@@ -39,7 +41,8 @@ end
 configure do
   # Creates new Google API client instance to authorize service account
   client = Google::APIClient.new(
-    :application_name => APPLICATION_NAME
+    :application_name => APPLICATION_NAME,
+    :host => 'www.googleapis.com'
   )
   key = Google::APIClient::KeyUtils.load_from_pkcs12(SERVICE_ACCOUNT_PRIVATE_KEY, 'notasecret')
   client.authorization = Signet::OAuth2::Client.new(
@@ -50,7 +53,7 @@ configure do
     :signing_key => key)
 
   ## Request a token for our service account
-  client.authorization.fetch_access_token!
+  puts client.authorization.fetch_access_token!
   # Reads WOBS discovery file
   doc = File.read('wobs-discovery.json')
   # Registers API client using discovered file
@@ -78,8 +81,10 @@ get "/jwt/:type" do |typ|
     "payload" => {
       "loyaltyObjects" => Array.new,
       "offerObjects" => Array.new,
+      "giftCardObjects" => Array.new,
       "loyaltyClasses" => Array.new,
-      "offerClasses" => Array.new
+      "offerClasses" => Array.new,
+      "giftCardClasses" => Array.new
     },
     "origins"=> ORIGINS
   }
@@ -89,6 +94,9 @@ get "/jwt/:type" do |typ|
   when "offer"
     offerobject = OfferObject.generate_object(ISSUER_ID,OFFER_CLASS_ID,OFFER_OBJECT_ID)
     jwt['payload']['offerObjects'].push(offerobject)
+  when "giftcard"
+    giftcardobject = GiftCardObject.generate_object(ISSUER_ID,GIFTCARD_CLASS_ID,GIFTCARD_OBJECT_ID)
+    jwt['payload']['giftCardObjects'].push(giftcardobject)
   end
   private_key = Google::APIClient::PKCS12.load_key(SERVICE_ACCOUNT_PRIVATE_KEY, 'notasecret')
   jwtEncoded = JWT.encode(jwt, private_key, "RS256")
@@ -103,6 +111,10 @@ post "/insert/:type" do |typ|
     api_object = OfferClass.generate_class(ISSUER_ID,OFFER_CLASS_ID)
     object_id = OFFER_CLASS_ID
     api_method = walletobjects.offerclass.insert
+  when "giftcard"
+    api_object = GiftCardClass.generate_class(ISSUER_ID,GIFTCARD_CLASS_ID)
+    object_id = GIFTCARD_CLASS_ID
+    api_method = walletobjects.giftcardclass.insert
   end
   # Makes an API call to insert a new loyalty or offer class
   result = api_client.execute(
@@ -171,6 +183,8 @@ get "/list-classes/:type" do |typ|
     api_method = walletobjects.loyaltyclass.list
   when "offer"
     api_method = walletobjects.offerclass.list
+  when "giftcard"
+    api_method = walletobjects.giftcardclass.list
   end
   # Makes an API call to list loyalty or offer classes based on issuerId
   result = api_client.execute(
@@ -191,6 +205,9 @@ get "/list-objects/:type" do |typ|
   when "offer"
     api_method = walletobjects.offerobject.list
     class_id = "#{ISSUER_ID}.#{OFFER_CLASS_ID}"
+  when "giftcard"
+    api_method = walletobjects.giftcardobject.list
+    class_id = "#{ISSUER_ID}.#{GIFTCARD_CLASS_ID}"
   end
   # Makes an API call to list loyalty or offer objects based on classId
   result = api_client.execute(
@@ -211,12 +228,18 @@ get "/get/:type" do |typ|
   when "offerclass"
     api_method = walletobjects.offerclass.get
     resource_id = "#{ISSUER_ID}.#{OFFER_CLASS_ID}"
+  when "giftcardclass"
+    api_method = walletobjects.giftcardclass.get
+    resource_id = "#{ISSUER_ID}.#{GIFTCARD_CLASS_ID}"
   when "loyaltyobject"
     api_method = walletobjects.loyaltyobject.get
     resource_id = "#{ISSUER_ID}.#{LOYALTY_OBJECT_ID}"
   when "offerobject"
     api_method = walletobjects.offerobject.get
     resource_id = "#{ISSUER_ID}.#{OFFER_OBJECT_ID}"
+  when "giftcardobject"
+    api_method = walletobjects.giftcardobject.get
+    resource_id = "#{ISSUER_ID}.#{GIFTCARD_OBJECT_ID}"
   end
   # Makes an API call to get class or object based on type received in the request
   result = api_client.execute(
@@ -239,6 +262,10 @@ get "/update/:type" do |typ|
     api_get_method = walletobjects.offerclass.get
     api_update_method = walletobjects.offerclass.update
     resource_id = "#{ISSUER_ID}.#{OFFER_CLASS_ID}"
+  when "giftcardclass"
+    api_get_method = walletobjects.giftcardclass.get
+    api_update_method = walletobjects.giftcardclass.update
+    resource_id = "#{ISSUER_ID}.#{GIFTCARD_CLASS_ID}"
   when "loyaltyobject"
     api_get_method = walletobjects.loyaltyobject.get
     api_update_method = walletobjects.loyaltyobject.update
@@ -247,6 +274,10 @@ get "/update/:type" do |typ|
     api_get_method = walletobjects.offerobject.get
     api_update_method = walletobjects.offerobject.update
     resource_id = "#{ISSUER_ID}.#{OFFER_OBJECT_ID}"
+  when "giftcardobject"
+    api_get_method = walletobjects.giftcardobject.get
+    api_update_method = walletobjects.giftcardobject.update
+    resource_id = "#{ISSUER_ID}.#{GIFTCARD_OBJECT_ID}"
   end
   # Makes API Call to get class or object based on type received in the request
   get_result = api_client.execute(

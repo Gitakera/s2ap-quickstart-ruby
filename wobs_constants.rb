@@ -34,6 +34,8 @@ module WalletConstants
   LOYALTY_OBJECT_ID = "LoyaltyObject"
   OFFER_CLASS_ID = "OfferClass"
   OFFER_OBJECT_ID = "OfferObject"
+  GIFTCARD_CLASS_ID = "GiftCardClass"
+  GIFTCARD_OBJECT_ID = "GiftCardObject"
   SCOPES = "https://www.googleapis.com/auth/wallet_object.issuer"
 # ------------------------
 end

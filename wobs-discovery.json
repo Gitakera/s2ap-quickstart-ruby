@@ -4,7 +4,7 @@
  "id": "walletobjects:v1",
  "name": "walletobjects",
  "version": "v1",
- "revision": "20131125",
+ "revision": "20140115",
  "description": "The Wallet Objects API allows you to connect your business to millions of Google users and showcase your loyalty programs, offers, boarding passes, tickets, and more.",
  "ownerDomain": "google.com",
  "ownerName": "Google",
@@ -1635,6 +1635,23 @@
     }
    }
   },
+  "IconBody": {
+   "id": "IconBody",
+   "type": "object",
+   "properties": {
+    "bodys": {
+     "type": "array",
+     "description": "A list of strings describing the body of the of the text module. The list of string is displayed with vertical spacing between them.",
+     "items": {
+      "type": "string"
+     }
+    },
+    "icon": {
+     "type": "string",
+     "description": "The icon that summarizes what the icon should look like."
+    }
+   }
+  },
   "Image": {
    "id": "Image",
    "type": "object",
@@ -2813,14 +2830,22 @@
   "TextModuleData": {
    "id": "TextModuleData",
    "type": "object",
+   "description": "Data for Text module. All fields are optional. Header will be displayed if available, different types of bodies will be concatenated if they are defined.",
    "properties": {
     "body": {
      "type": "string",
-     "description": "The body of the Text Module."
+     "description": "The body of the Text Module, which is defined as an uninterrupted string."
     },
     "header": {
      "type": "string",
      "description": "The header of the Text Module."
+    },
+    "iconBodys": {
+     "type": "array",
+     "description": "The body of the Text Module, which is a mapping from an icon to a list of strings. The list of string is displayed with vertical spacing between them.",
+     "items": {
+      "$ref": "IconBody"
+     }
     }
    }
   },
