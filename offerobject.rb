@@ -34,9 +34,9 @@ module OfferObject
         "kind" => "walletobjects#barcode",
         "type" => "upcA",
         "value" => "123456789012",
-        "label" => "User Id",
+        "label" => "Offer Code",
         "alternateText" => "12345"
-      }
+      },
     }
   end
 end
