@@ -57,10 +57,22 @@ module GiftCardClass
           }
         ]
       },
-      "locations" => [{
+      "locations"=>[{
         "kind" => "walletobjects#latLongPoint",
-        "latitude" => 37.422601,
-        "longitude" => -122.085286
+        "latitude" => 37.424015499999996,
+        "longitude" => -122.09259560000001
+        },{
+        "kind" => "walletobjects#latLongPoint",
+        "latitude" => 37.424354,
+        "longitude" => -122.09508869999999
+        },{
+        "kind" => "walletobjects#latLongPoint",
+        "latitude" => 37.7901435,
+        "longitude" => -122.39026709999997
+        },{
+        "kind" => "walletobjects#latLongPoint",
+        "latitude" => 40.7406578,
+        "longitude" => -74.00208940000002
       }],
       "allowMultipleUsersPerObject" => true,
       "reviewStatus" => "underReview",
