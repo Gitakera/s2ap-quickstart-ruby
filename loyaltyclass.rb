@@ -39,7 +39,7 @@ module LoyaltyClass
         "uris" => [
           {
             "kind" => "walletobjects#uri",
-            "uri" => "https://maps.google.com/?q=Google+Headquarters,+Amphitheatre+Parkway,+Mountain+View,+CA",
+            "uri" => "http://maps.google.com/maps?q=google",
             "description" => "Nearby Locations"
           },
           {
