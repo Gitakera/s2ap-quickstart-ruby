@@ -31,22 +31,27 @@ module LoyaltyClass
       "textModulesData" => [
         {
           "header" => "Rewards details",
-          "body" => "Welcome to Baconrista rewards.  For every 5 coffees purchased " +
-                   "you'll receive a free bacon fat latte"
+          "body" => "Welcome to Baconrista rewards.  Enjoy your rewards for being a loyal customer. " +
+                   "10 points for every dollar spent.  Redeem your points for free coffee, bacon and more!"
         }
       ],
       "linksModuleData" => {
         "uris" => [
           {
             "kind" => "walletobjects#uri",
-            "uri" => "http://www.baconrista.com/",
-            "description" => "Baconrista"
+            "uri" => "https://maps.google.com/?q=Google+Headquarters,+Amphitheatre+Parkway,+Mountain+View,+CA",
+            "description" => "Nearby Locations"
+          },
+          {
+            "kind" => "walletobjects#uri",
+            "uri" => "tel:6505555555",
+            "description" => "Call Customer Service"
           }
         ]
       },
       "infoModuleData" => {
-        "hexFontColor" => "#FF3300",
-        "hexBackgroundColor" => "#ABABAB"
+        "hexFontColor" => "#F8EDC1",
+        "hexBackgroundColor" => "#442905"
       },
       "imageModulesData" => [
         {
@@ -54,7 +59,7 @@ module LoyaltyClass
             "kind" => "walletobjects#image",
             "sourceUri" => {
               "kind" => "walletobjects#uri",
-              "uri" => "http://farm8.staticflickr.com/7401/11177116434_d8e600bba6_o.jpg",
+              "uri" => "http://farm4.staticflickr.com/3738/12440799783_3dc3c20606_b.jpg",
               "description" => "Coffee beans"
             }
           }

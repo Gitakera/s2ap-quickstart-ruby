@@ -84,13 +84,13 @@ module OfferClass
         "uris" => [
           {
             "kind" => "walletobjects#uri",
-            "uri" => "http://www.baconrista.com/",
-            "description" => "Baconrista"
+            "uri" => "https://maps.google.com/?q=Google+Headquarters,+Amphitheatre+Parkway,+Mountain+View,+CA",
+            "description" => "Nearby Locations"
           },
           {
             "kind" => "walletobjects#uri",
-            "uri" => "https://maps.google.com/?q=Google+Headquarters,+Amphitheatre+Parkway,+Mountain+View,+CA",
-            "description" => "Store Location"
+            "uri" => "tel:6505555555",
+            "description" => "Call Customer Service"
           }
         ]
       },
@@ -100,7 +100,7 @@ module OfferClass
             "kind" => "walletobjects#image",
             "sourceUri" => {
               "kind" => "walletobjects#uri",
-              "uri" => "http://farm8.staticflickr.com/7401/11177116434_d8e600bba6_o.jpg",
+              "uri" => "http://farm4.staticflickr.com/3738/12440799783_3dc3c20606_b.jpg",
               "description" => "Coffee beans"
             }
           }

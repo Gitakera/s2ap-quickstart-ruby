@@ -34,8 +34,9 @@ module LoyaltyObject
       "id" => "#{issuerId}.#{objectId}",
       "textModulesData" => [{
         "header" => "Jane's Baconrista Rewards",
-        "body" => "You are 5 coffees away from receiving a free " +
-                  "bacon fat latte"
+        "body" => "Save more at your local Mountain View store Jane. " +
+                  "You get 1 bacon fat latte for every 5 coffees purchased.  " +
+                  "Also just for you, 10% off all pastries in the Mountain View store."
       }],
       "linksModuleData" => {
         "uris" => [
@@ -46,21 +47,11 @@ module LoyaltyObject
           }]
       },
       "infoModuleData" => {
-        "hexFontColor" => "#FFFFFF",
-        "hexBackgroundColor" => "#FC058C",
+        "hexFontColor" => "#F8EDC1",
+        "hexBackgroundColor" => "#442905",
         "labelValueRows" => [{
-          "hexFontColor" => "#000000",
-          "hexBackgroundColor" => "#BBCCFC",
-          "columns" => [{
-            "label" => "Member Name",
-            "value" => "Jane Doe"
-          }, {
-            "label" => "Membership #",
-            "value" => "1234567890"
-          }]
-        }, {
-          "hexFontColor" => "#EDEDDD",
-          "hexBackgroundColor" => "#FFFB00",
+          "hexFontColor" => "#F8EDC1",
+          "hexBackgroundColor" => "#922635",
           "columns" => [{
             "label" => "Next Reward in",
             "value" => "2 coffees"
@@ -68,12 +59,19 @@ module LoyaltyObject
             "label" => "Member Since",
             "value" => "01/15/2013"
           }]
+        }, {
+          "hexFontColor" => "#F8EDC1",
+          "hexBackgroundColor" => "#922635",
+          "columns" => [{
+            "label" => "Local Store",
+            "value" => "Mountain View"
+          }]
         }],
         "showLastUpdateTime" => "true"
       },
       "loyaltyPoints" => {
         "balance" => {
-          "string" => "500"
+          "string" => "5000"
         },
         "label" => "Points",
           "pointsType" => "points"
