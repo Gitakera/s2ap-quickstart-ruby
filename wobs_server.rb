@@ -88,18 +88,22 @@ get "/jwt/:type" do |typ|
     },
     "origins"=> ORIGINS
   }
+  obj_id = rand(100).to_s
+
   case typ when "loyalty"
-    loyaltyobject = LoyaltyObject.generate_object(ISSUER_ID,LOYALTY_CLASS_ID,LOYALTY_OBJECT_ID)
+    loyaltyobject = LoyaltyObject.generate_object(ISSUER_ID,LOYALTY_CLASS_ID,LOYALTY_OBJECT_ID + obj_id)
     jwt['payload']['loyaltyObjects'].push(loyaltyobject)
   when "offer"
-    offerobject = OfferObject.generate_object(ISSUER_ID,OFFER_CLASS_ID,OFFER_OBJECT_ID)
+    offerobject = OfferObject.generate_object(ISSUER_ID,OFFER_CLASS_ID,OFFER_OBJECT_ID + obj_id)
     jwt['payload']['offerObjects'].push(offerobject)
   when "giftcard"
-    giftcardobject = GiftCardObject.generate_object(ISSUER_ID,GIFTCARD_CLASS_ID,GIFTCARD_OBJECT_ID)
+    giftcardobject = GiftCardObject.generate_object(ISSUER_ID,GIFTCARD_CLASS_ID,GIFTCARD_OBJECT_ID + obj_id)
     jwt['payload']['giftCardObjects'].push(giftcardobject)
   end
   private_key = Google::APIClient::PKCS12.load_key(SERVICE_ACCOUNT_PRIVATE_KEY, 'notasecret')
   jwtEncoded = JWT.encode(jwt, private_key, "RS256")
+  puts jwtEncoded + "**"
+  return jwtEncoded
 end
 
 post "/insert/:type" do |typ|
