@@ -1,7 +1,7 @@
 wallet-objects-quickstart-ruby
 ==============================
 
-This sample demonstrates integration of the basic components of the Wallet Objects API.  Review the [quickstart guide](https://developers.google.com/commerce/wallet/objects/quickstart-rubyd) to run the sample.
+This sample demonstrates integration of the basic components of the Wallet Objects API.  Review the [quickstart guide](https://developers.google.com/commerce/wallet/objects/quickstart-ruby) to run the sample.
 
 This sample showcases several aspects of the API
 * Creation of Wallet Classes and Wallet Objects
