@@ -84,7 +84,7 @@ module OfferClass
         "uris" => [
           {
             "kind" => "walletobjects#uri",
-            "uri" => "http://maps.google.com/maps?q=google",
+            "uri" => "http://maps.google.com/?q=google",
             "description" => "Nearby Locations"
           },
           {
