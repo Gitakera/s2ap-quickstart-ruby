@@ -115,8 +115,7 @@ module LoyaltyClass
       }],
       "rewardsTier" => "Gold",
       "rewardsTierLabel" => "Tier",
-      "reviewStatus" => "underReview",
-      "version" => "1"
+      "reviewStatus" => "underReview"
     }
   end
 end

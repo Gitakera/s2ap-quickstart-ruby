@@ -75,8 +75,7 @@ module GiftCardClass
         "longitude" => -74.00208940000002
       }],
       "allowMultipleUsersPerObject" => true,
-      "reviewStatus" => "underReview",
-      "version" => "1"
+      "reviewStatus" => "underReview"
     }
   end
 end

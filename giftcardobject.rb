@@ -69,8 +69,7 @@ module GiftCardObject
         }
       }],
 
-      "state" => "active",
-      "version" => 1
+      "state" => "active"
     }
   end
 end

@@ -24,7 +24,6 @@ module OfferClass
     offer_class = {
       "kind" => "walletobjects#offerClass",
       "id" => "#{issuerId}.#{classId}",
-      "version" => "1",
       "issuerName" => "Baconrista Coffee",
       "issuerData" => {
       "kind" => "walletobjects#typedValue"

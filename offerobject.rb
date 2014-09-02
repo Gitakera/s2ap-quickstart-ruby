@@ -25,7 +25,6 @@ module OfferObject
       "kind" => "walletobjects#offerObject",
       "classId" => "#{issuerId}.#{classId}",
       "id" => "#{issuerId}.#{objectId}",
-      "version" => "1",
       "state" => "active",
       "issuerData" => {
         "kind" => "walletobjects#typedValue"
