@@ -89,7 +89,8 @@ module LoyaltyObject
           }
         }
       }],
-      "state" => "active"
+      "state" => "active",
+      "version" => "1"
     }
   end
 end
