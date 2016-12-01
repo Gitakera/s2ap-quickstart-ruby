@@ -76,7 +76,7 @@ get "/jwt/:type" do |typ|
   jwt = {
     "iss"=> SERVICE_ACCOUNT_EMAIL_ADDRESS,
     "aud" => "google",
-    "typ" => "savetowallet",
+    "typ" => "savetoandroidpay",
     "iat"=> Time.now.utc.to_i,
     "payload" => {
       "loyaltyObjects" => Array.new,

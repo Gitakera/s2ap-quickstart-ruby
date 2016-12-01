@@ -45,25 +45,25 @@ function init(){
 
   $.when($.get("jwt/loyalty", function(data){
 	  console.log(data);
-    saveToWallet = document.createElement("g:savetowallet");
-    saveToWallet.setAttribute("jwt", data);
-    saveToWallet.setAttribute("onsuccess","successHandler");
-    saveToWallet.setAttribute("onfailure","failureHandler");
-    document.querySelector("#loyaltysave").appendChild(saveToWallet);}),
+    saveToAndroidPay = document.createElement("g:savetoandroidpay");
+    saveToAndroidPay.setAttribute("jwt", data);
+    saveToAndroidPay.setAttribute("onsuccess","successHandler");
+    saveToAndroidPay.setAttribute("onfailure","failureHandler");
+    document.querySelector("#loyaltysave").appendChild(saveToAndroidPay);}),
     $.get("jwt/offer", function(data){
     console.log(data);
-    saveToWallet = document.createElement("g:savetowallet");
-    saveToWallet.setAttribute("jwt", data);
-    saveToWallet.setAttribute("onsuccess","successHandler");
-    saveToWallet.setAttribute("onfailure","failureHandler");
-    document.querySelector("#offersave").appendChild(saveToWallet);})/*,
+    saveToAndroidPay = document.createElement("g:savetoandroidpay");
+    saveToAndroidPay.setAttribute("jwt", data);
+    saveToAndroidPay.setAttribute("onsuccess","successHandler");
+    saveToAndroidPay.setAttribute("onfailure","failureHandler");
+    document.querySelector("#offersave").appendChild(saveToAndroidPay);})/*,
     $.get("jwt/giftcard", function(data){
     console.log(data);
-    saveToWallet = document.createElement("g:savetowallet");
-    saveToWallet.setAttribute("jwt", data);
-    saveToWallet.setAttribute("onsuccess","successHandler");
-    saveToWallet.setAttribute("onfailure","failureHandler");
-    document.querySelector("#giftcardsave").appendChild(saveToWallet);})*/).done(function(){
+    saveToAndroidPay = document.createElement("g:savetoandroidpay");
+    saveToAndroidPay.setAttribute("jwt", data);
+    saveToAndroidPay.setAttribute("onsuccess","successHandler");
+    saveToAndroidPay.setAttribute("onfailure","failureHandler");
+    document.querySelector("#giftcardsave").appendChild(saveToAndroidPay);})*/).done(function(){
         script = document.createElement("script");
         script.src = "https://apis.google.com/js/plusone.js";
         document.head.appendChild(script);
