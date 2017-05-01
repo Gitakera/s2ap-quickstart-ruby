@@ -106,13 +106,6 @@ module LoyaltyClass
         }
       },
       "programName" => "Baconrista Rewards",
-      "renderSpecs" => [{
-        "templateFamily" => "1.loyalty_list",
-        "viewName" => "g_list"
-      }, {
-        "templateFamily" => "1.loyalty_expanded",
-        "viewName" => "g_expanded"
-      }],
       "rewardsTier" => "Gold",
       "rewardsTierLabel" => "Tier",
       "reviewStatus" => "underReview"
