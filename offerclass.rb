@@ -28,13 +28,6 @@ module OfferClass
       "issuerData" => {
       "kind" => "walletobjects#typedValue"
       },
-      "renderSpecs" => [{
-        "viewName" => "g_list",
-        "templateFamily" => "1.offer_list"
-      },{
-        "viewName" => "g_expanded",
-        "templateFamily" => "1.offer_expanded"
-      }],
       "title" => "20% off on one bacon fat latte",
       "redemptionChannel" => "both",
       "provider" => "Baconrista Deals",
