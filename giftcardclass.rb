@@ -26,13 +26,6 @@ module GiftCardClass
       "id" => "#{issuerId}.#{classId}",
       "issuerName" => "Baconrista",
       "merchantName" => "Baconrista",
-      "renderSpecs" => [{
-        "templateFamily" => "1.giftCard1_list",
-        "viewName" => "g_list"
-      }, {
-        "templateFamily" => "1.giftCard1_expanded",
-        "viewName" => "g_expanded"
-      }],
       "programLogo" => {
         "kind" => "walletobjects#image",
         "sourceUri" => {
